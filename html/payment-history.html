@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment History - Fit & Lift</title>
+  <link rel="stylesheet" href="/styles/payment-historystyles.css" />
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-left">
+      <h2>Fit & Lift Admin Panel</h2>
+    </div>
+    <div class="header-right">
+      <div class="admin-profile" id="adminProfile">
+        <span class="admin-name">Admin Juan <span class="chevron">▼</span></span>
+        <img src="/pictures/profile.jpg" alt="Admin Profile" class="profile-pic">
+        <div class="profile-dropdown">
+          <a href="#">Account Settings</a>
+          <a href="#">Create Another Admin</a>
+          <a href="#">Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-wrapper">
+    <!-- Sidebar Section -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/pictures/logo.png" alt="Fit & Lift Logo" class="sidebar-logo" />
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html" class="dashboard"> Dashboard</a></li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Payment Management <span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Add Payment</a></li>
+              <li><a href="payment-history.html">Payment History</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Member Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-member.html" class="add-member-link">Add Member</a></li>
+              <li><a href="#">View All Members</a></li>
+              <li><a href="#">Approve New Signups</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Trainer Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-trainer.html" class="add-trainer-link">Add Trainer</a></li>
+              <li><a href="#">Assign Trainer</a></li>
+              <li><a href="#">View All Trainers</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Subscription Tracking<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Check Status</a></li>
+              <li><a href="#">Update / Renew</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content">
+        <section id="paymentHistoryPage" class="page-section">
+            <h1>Payment History</h1>
+            <table class="payment-history-table">
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Member Name</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#001</td>
+                        <td>John Doe</td>
+                        <td>$100</td>
+                        <td>01/05/2025</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr>
+                        <td>#002</td>
+                        <td>Jane Smith</td>
+                        <td>$120</td>
+                        <td>02/05/2025</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr>
+                        <td>#003</td>
+                        <td>David Green</td>
+                        <td>$150</td>
+                        <td>03/05/2025</td>
+                        <td>Pending</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+  </div>
+
+  <script>
+    // Toggle profile dropdown
+    document.getElementById('adminProfile').addEventListener('click', function() {
+      this.classList.toggle('active');
+    });
+
+    // Sidebar dropdown toggle
+    const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+    dropdownBtns.forEach(button => {
+      button.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const dropdownMenu = this.nextElementSibling;
+        dropdownMenu.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

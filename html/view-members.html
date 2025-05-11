@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Members - Fit & Lift</title>
+  <link rel="stylesheet" href="/styles/view-membersstyles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-left">
+      <h2>Fit & Lift</h2>
+    </div>
+    <div class="header-right">
+      <div class="admin-profile" onclick="toggleProfileDropdown()">
+        <img src="/images/admin-profile.jpg" alt="Admin Profile" class="profile-pic">
+        <span>Admin</span>
+        <i class="fas fa-chevron-down"></i>
+        <div class="profile-dropdown">
+          <a href="#"><i class="fas fa-user"></i> Profile</a>
+          <a href="#"><i class="fas fa-cog"></i> Settings</a>
+          <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-wrapper">
+    <!-- Sidebar Section -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/pictures/logo.png" alt="Fit & Lift Logo" class="sidebar-logo" />
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html" class="dashboard"> Dashboard</a></li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Payment Management <span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Add Payment</a></li>
+              <li><a href="payment-history.html">Payment History</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Member Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-member.html" class="add-member-link">Add Member</a></li>
+              <li><a href="view-members.html">View All Members</a></li>
+              <li><a href="approve-signups.html">Approve New Signups</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Trainer Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-trainer.html" class="add-trainer-link">Add Trainer</a></li>
+              <li><a href="assign-trainers.html">Assign Trainer</a></li>
+              <li><a href="view">View All Trainers</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Subscription Tracking<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Check Status</a></li>
+              <li><a href="#">Update / Renew</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content">
+      <section id="viewMembersPage" class="page-section">
+        <h1>View All Members</h1>
+        <table class="members-table">
+          <thead>
+            <tr>
+              <th>Member ID</th>
+              <th>Member Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Package Availed</th>
+              <th>Days Remaining</th>
+              <th>Password</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#001</td>
+              <td>John Doe</td>
+              <td>johndoe@example.com</td>
+              <td>(123) 456-7890</td>
+              <td>Monthly</td>
+              <td>12</td>
+              <td>********</td>
+              <td>
+                <button class="view-details-btn btn-blue" onclick="openDetailsModal('John Doe')">View Details</button>
+             
+                <button class="reset-password-btn btn-orange" onclick="openPasswordResetModal('John Doe')">Reset Password</button>
+                <button class="delete-member-btn btn-red" onclick="openDeleteModal('John Doe')">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#002</td>
+              <td>Jane Smith</td>
+              <td>janesmith@example.com</td>
+              <td>(098) 765-4321</td>
+              <td>Annual</td>
+              <td>90</td>
+              <td>********</td>
+              <td>
+                <button class="view-details-btn btn-blue" onclick="openDetailsModal('Jane Smith')">View Details</button>
+                
+                <button class="reset-password-btn btn-orange" onclick="openPasswordResetModal('Jane Smith')">Reset Password</button>
+                <button class="delete-member-btn btn-red" onclick="openDeleteModal('Jane Smith')">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- Password Reset Modal -->
+  <div id="passwordResetModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('passwordResetModal')">&times;</span>
+      <h2>Reset Password</h2>
+      <p id="passwordResetMessage"></p>
+      <input type="password" id="newPassword" placeholder="Enter New Password" />
+      <button onclick="submitPasswordReset()">Submit</button>
+    </div>
+  </div>
+
+  <!-- Delete Member Modal -->
+  <div id="deleteMemberModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('deleteMemberModal')">&times;</span>
+      <h2>Delete Member</h2>
+      <p id="deleteMemberMessage"></p>
+      <button onclick="confirmDelete()">Confirm Deletion</button>
+      <button onclick="closeModal('deleteMemberModal')">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Member Details Modal -->
+  <div id="detailsModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('detailsModal')">&times;</span>
+      <h2>Member Details</h2>
+      <div id="memberDetailsContent">
+        <!-- Details will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Renew Subscription Modal -->
+  <div id="renewModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('renewModal')">&times;</span>
+      <h2>Renew Subscription</h2>
+      <form onsubmit="submitRenewal(event)">
+        <label for="renewPackage">Select Package:</label>
+        <select id="renewPackage">
+          <option value="monthly">Monthly</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="annual">Annual</option>
+        </select>
+        <label for="renewStart">Start Date:</label>
+        <input type="date" id="renewStart" required />
+        <button type="submit">Renew</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Toggle profile dropdown
+    function toggleProfileDropdown() {
+      const profile = document.querySelector('.admin-profile');
+      profile.classList.toggle('active');
+    }
+
+    // Toggle sidebar dropdowns
+    function toggleDropdown(id) {
+      const dropdown = document.getElementById(id);
+      dropdown.classList.toggle('active');
+    }
+
+    // Open password reset modal
+    function openPasswordResetModal(memberName) {
+      document.getElementById('passwordResetMessage').innerText = `Enter a new password for ${memberName}:`;
+      document.getElementById('passwordResetModal').style.display = "flex";
+    }
+
+    // Open delete member modal
+    function openDeleteModal(memberName) {
+      document.getElementById('deleteMemberMessage').innerText = `Are you sure you want to delete ${memberName}?`;
+      document.getElementById('deleteMemberModal').style.display = "flex";
+    }
+
+    // Submit new password
+    function submitPasswordReset() {
+      const newPassword = document.getElementById('newPassword').value;
+      if (newPassword) {
+        alert(`Password has been updated to: ${newPassword}`);
+        closeModal('passwordResetModal');
+        // Replace with server-side update logic
+      }
+    }
+
+    // Confirm deletion
+    function confirmDelete() {
+      alert('Member has been deleted.');
+      closeModal('deleteMemberModal');
+      // Replace with server-side deletion logic
+    }
+
+    // Close modal function
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+    }
+
+    // Open details modal
+    function openDetailsModal(memberName) {
+      document.getElementById('detailsModal').style.display = "flex";
+      document.getElementById('memberDetailsContent').innerHTML = `<p>Details for <b>${memberName}</b> will be shown here.</p>`;
+    }
+
+    // Open renew modal
+    function openRenewModal(memberName) {
+      document.getElementById('renewModal').style.display = "flex";
+      document.getElementById('renewModal').setAttribute('data-member', memberName);
+    }
+
+    // Submit renewal
+    function submitRenewal(event) {
+      event.preventDefault();
+      const memberName = document.getElementById('renewModal').getAttribute('data-member');
+      const pkg = document.getElementById('renewPackage').value;
+      const start = document.getElementById('renewStart').value;
+      alert(`Renewed ${memberName}'s subscription to ${pkg} starting ${start}`);
+      closeModal('renewModal');
+    }
+
+    function toggleProfileDropdown() {
+        document.querySelector('.admin-profile').classList.toggle('active');
+    }
+
+    // Sidebar dropdown logic
+    document.addEventListener('DOMContentLoaded', () => {
+        const dropdownButtons = document.querySelectorAll('.dropdown-btn');
+
+        dropdownButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const dropdown = button.nextElementSibling;
+                dropdown.classList.toggle('active');
+            });
+        });
+    });
+  </script>
+
+  <style>
+    /* Modal Styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 8px;
+      width: 400px;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal h2 {
+      color: #f97316;
+      margin-bottom: 20px;
+    }
+
+    .modal input {
+      padding: 12px;
+      margin: 10px 0;
+      width: 80%;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background-color: #444;
+      color: #fff;
+    }
+
+    .modal button {
+      background-color: #f97316;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 5px;
+    }
+
+    .modal button:hover {
+      background-color: #e36211;
+    }
+
+    .modal .close {
+      color: #f97316;
+      font-size: 30px;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+    }
+
+    /* Colorful Action Buttons */
+    .btn-blue {
+      background-color: #2563eb;
+      color: #fff;
+      margin: 2px 2px;
+    }
+    .btn-blue:hover {
+      background-color: #1d4ed8;
+    }
+    .btn-green {
+      background-color: #22c55e;
+      color: #fff;
+      margin: 2px 2px;
+    }
+    .btn-green:hover {
+      background-color: #16a34a;
+    }
+    .btn-orange {
+      background-color: #f97316;
+      color: #fff;
+      margin: 2px 2px;
+    }
+    .btn-orange:hover {
+      background-color: #ea580c;
+    }
+    .btn-red {
+      background-color: #ef4444;
+      color: #fff;
+      margin: 2px 2px;
+    }
+    .btn-red:hover {
+      background-color: #b91c1c;
+    }
+    /* Table Button Layout */
+    .members-table button {
+      min-width: 110px;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin: 2px 2px;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      display: inline-block;
+    }
+  </style>
+</body>
+</html>

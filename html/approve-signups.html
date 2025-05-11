@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Approve New Signups - Fit & Lift</title>
+  <link rel="stylesheet" href="/styles/approve-signupsstyles.css" />
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-left">
+      <h2>Fit & Lift Admin Panel</h2>
+    </div>
+    <div class="header-right">
+      <div class="admin-profile" id="adminProfile">
+        <span class="admin-name">Admin Juan <span class="chevron">▼</span></span>
+        <img src="/pictures/profile.jpg" alt="Admin Profile" class="profile-pic">
+        <div class="profile-dropdown">
+          <a href="#">Account Settings</a>
+          <a href="#">Create Another Admin</a>
+          <a href="#">Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-wrapper">
+    <!-- Sidebar Section -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/pictures/logo.png" alt="Fit & Lift Logo" class="sidebar-logo" />
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html" class="dashboard">Dashboard</a></li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Payment Management <span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-payment.html">Add Payment</a></li>
+              <li><a href="payment-history.html">Payment History</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Member Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-member.html">Add Member</a></li>
+              <li><a href="view-members.html">View All Members</a></li>
+              <li><a href="approve-signups.html">Approve New Signups</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Trainer Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-trainer.html">Add Trainer</a></li>
+              <li><a href="#">Assign Trainer</a></li>
+              <li><a href="#">View All Trainers</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Subscription Tracking<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Check Status</a></li>
+              <li><a href="#">Update / Renew</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <div class="page-section">
+        <h1>Approve New Signups</h1>
+        
+        <!-- Pending Signups Table -->
+        <div class="table-container">
+          <table class="signups-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Package</th>
+                <th>Signup Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John Doe</td>
+                <td>john.doe@email.com</td>
+                <td>+63 912 345 6789</td>
+                <td>Premium Monthly</td>
+                <td>2024-03-15</td>
+                <td><span class="status pending">Pending</span></td>
+                <td>
+                  <button class="action-btn approve" onclick="showConfirmModal('approve', 'John Doe')">Approve</button>
+                  <button class="action-btn reject" onclick="showConfirmModal('reject', 'John Doe')">Reject</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Jane Smith</td>
+                <td>jane.smith@email.com</td>
+                <td>+63 923 456 7890</td>
+                <td>Basic Yearly</td>
+                <td>2024-03-14</td>
+                <td><span class="status pending">Pending</span></td>
+                <td>
+                  <button class="action-btn approve" onclick="showConfirmModal('approve', 'Jane Smith')">Approve</button>
+                  <button class="action-btn reject" onclick="showConfirmModal('reject', 'Jane Smith')">Reject</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="modalTitle">Confirm Action</h2>
+      <p id="modalMessage">Are you sure you want to <span id="actionType">approve</span> <span id="memberName">John Doe</span>?</p>
+      <div class="modal-buttons">
+        <button id="confirmAction" class="action-btn">Confirm</button>
+        <button id="cancelAction" class="action-btn cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Admin profile dropdown
+    const adminProfile = document.getElementById('adminProfile');
+    adminProfile.addEventListener('click', () => {
+      adminProfile.classList.toggle('active');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!adminProfile.contains(e.target)) {
+        adminProfile.classList.remove('active');
+      }
+    });
+
+    // Sidebar dropdown toggle
+    const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+    dropdownBtns.forEach(button => {
+      button.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const dropdownMenu = this.nextElementSibling;
+        dropdownMenu.classList.toggle('active');
+      });
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('confirmModal');
+    const closeModal = document.querySelector('.close-modal');
+    const cancelAction = document.getElementById('cancelAction');
+    const confirmAction = document.getElementById('confirmAction');
+    let currentAction = '';
+    let currentMember = '';
+
+    function showConfirmModal(action, memberName) {
+      currentAction = action;
+      currentMember = memberName;
+      const modalTitle = document.getElementById('modalTitle');
+      const modalMessage = document.getElementById('modalMessage');
+      const actionType = document.getElementById('actionType');
+      const memberNameSpan = document.getElementById('memberName');
+      const confirmBtn = document.getElementById('confirmAction');
+
+      modalTitle.textContent = `Confirm ${action.charAt(0).toUpperCase() + action.slice(1)}`;
+      actionType.textContent = action;
+      memberNameSpan.textContent = memberName;
+      confirmBtn.className = `action-btn ${action}`;
+      confirmBtn.textContent = action.charAt(0).toUpperCase() + action.slice(1);
+
+      modal.style.display = 'flex';
+    }
+
+    function closeConfirmModal() {
+      modal.style.display = 'none';
+    }
+
+    closeModal.onclick = closeConfirmModal;
+    cancelAction.onclick = closeConfirmModal;
+
+    confirmAction.onclick = function() {
+      // Here you would typically make an API call to process the action
+      console.log(`${currentAction}ing ${currentMember}`);
+      closeConfirmModal();
+    };
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        closeConfirmModal();
+      }
+    };
+  </script>
+</body>
+</html> 

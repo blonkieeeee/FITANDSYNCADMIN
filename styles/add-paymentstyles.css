@@ -1,0 +1,306 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* Header Styles */
+header {
+    background-color: #2d2d2d;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.header-left h2 {
+    color: #f97316;
+    font-size: 1.5rem;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Admin Profile Styles */
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.admin-profile:hover {
+    background-color: #3d3d3d;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #2d2d2d;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    min-width: 200px;
+    display: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-profile.active .profile-dropdown {
+    display: block;
+}
+
+.profile-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+
+.profile-dropdown a:hover {
+    background-color: #3d3d3d;
+}
+
+.profile-dropdown i {
+    width: 20px;
+}
+
+/* Layout */
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-top: 4rem;
+}
+
+.admin-layout {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background-color: #2d2d2d;
+    padding: 1rem;
+    position: fixed;
+    top: 4rem;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 999;
+    transition: transform 0.3s ease, width 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #3d3d3d;
+    margin-bottom: 1rem;
+}
+
+.sidebar-logo {
+    max-width: 150px;
+    height: auto;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.sidebar-nav a:hover {
+    background-color: #3d3d3d;
+}
+
+.sidebar-nav a.active {
+    background-color: #f97316;
+}
+
+.dropdown-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.dropdown-btn:hover {
+    background-color: #3d3d3d;
+}
+
+.dropdown-btn i {
+    transition: transform 0.3s;
+}
+
+.dropdown-btn.active i {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    list-style: none;
+    padding-left: 2rem;
+    display: none;
+}
+
+.dropdown-menu.active {
+    display: block;
+}
+
+.dropdown-menu a {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Main Content */
+.content {
+    flex: 1;
+    padding: 2rem;
+    margin-left: 280px;
+    transition: margin-left 0.3s ease;
+}
+
+/* Page Section (Add Payment Form) */
+.page-section {
+    background: #222;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+
+.page-section h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #f97316;
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 16px;
+    color: #ddd;
+}
+
+form input,
+form select,
+form button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background-color: #444;
+    color: #fff;
+    font-size: 16px;
+}
+
+form button {
+    background-color: #f97316;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #e36211;
+}
+
+/* Table Styles */
+.payer-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.payer-table th, .payer-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.payer-table th {
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+.payer-table tr:hover {
+    background-color: #444;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 0;
+        padding: 0;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+        width: 280px;
+        padding: 1rem;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    .header-left h2 {
+        font-size: 1.2rem;
+    }
+
+    .profile-pic {
+        width: 32px;
+        height: 32px;
+    }
+}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Trainers - Fit & Lift</title>
+    <link rel="stylesheet" href="/styles/view-trainersstyles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h2>Fit & Lift Admin Panel</h2>
+        </div>
+        <div class="header-right">
+            <div class="admin-profile" onclick="toggleProfileDropdown()">
+                <img src="/images/admin-avatar.png" alt="Admin" class="profile-pic">
+                <span>Admin Juan</span>
+                <div class="profile-dropdown">
+                    <a href="#">Account Settings</a>
+                    <a href="#">Create Another Admin</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/pictures/logo.png" alt="Fit & Lift Logo" class="sidebar-logo" />
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html" class="dashboard">Dashboard</a></li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Payment Management <span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-payment.html">Add Payment</a></li>
+              <li><a href="payment-history.html">Payment History</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Member Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-member.html">Add Member</a></li>
+              <li><a href="#">View All Members</a></li>
+              <li><a href="approve-signups.html">Approve New Signups</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Trainer Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-trainer.html">Add Trainer</a></li>
+              <li><a href="assign-trainers.html">Assign Trainer</a></li>
+              <li><a href="#">View All Trainers</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Subscription Tracking<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Check Status</a></li>
+              <li><a href="#">Update / Renew</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+        <main class="content">
+            <section class="page-section">
+                <h1>View All Trainers</h1>
+                
+                <!-- Search and Filter Section -->
+                <div class="search-filter-section">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search trainers...">
+                        <button class="search-btn">Search</button>
+                    </div>
+                    <div class="filter-box">
+                        <select>
+                            <option value="">All Trainers</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Trainers Table -->
+                <div class="table-container">
+                    <table class="trainers-table">
+                        <thead>
+                            <tr>
+                                <th>Trainer ID</th>
+                                <th>Name</th>
+                                <th>Specialization</th>
+                                <th>Status</th>
+                                <th>Members Assigned</th>
+                                <th>Monthly Income</th>
+                                <th>Total Income</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TR001</td>
+                                <td>John Smith</td>
+                                <td>Weight Training</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>8</td>
+                                <td>₱24,000</td>
+                                <td>₱288,000</td>
+                                <td>
+                                    <button class="action-btn view" onclick="viewTrainerDetails('TR001')">View</button>
+                                    <button class="action-btn edit" onclick="editTrainer('TR001')">Edit</button>
+                                    <button class="action-btn delete" onclick="confirmDelete('TR001')">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>TR002</td>
+                                <td>Sarah Johnson</td>
+                                <td>Yoga & Pilates</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>6</td>
+                                <td>₱18,000</td>
+                                <td>₱216,000</td>
+                              
+                                <td>
+                                    <button class="action-btn view" onclick="viewTrainerDetails('TR001')">View</button>
+                                    <button class="action-btn edit" onclick="editTrainer('TR001')">Edit</button>
+                                    <button class="action-btn delete" onclick="confirmDelete('TR001')">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>TR002</td>
+                                <td>Sarah Johnson</td>
+                                <td>Yoga & Pilates</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>6</td>
+                                <td>₱18,000</td>
+                                <td>₱216,000</td>
+                                <td>
+                                    <button class="action-btn view" onclick="viewTrainerDetails('TR002')">View</button>
+                                    <button class="action-btn edit" onclick="editTrainer('TR002')">Edit</button>
+                                    <button class="action-btn delete" onclick="confirmDelete('TR002')">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>TR003</td>
+                                <td>Mike Wilson</td>
+                                <td>CrossFit</td>
+                                <td><span class="status-badge inactive">Inactive</span></td>
+                                <td>0</td>
+                                <td>₱0</td>
+                                <td>₱0</td>
+                                <td>
+                                    <button class="action-btn view" onclick="viewTrainerDetails('TR003')">View</button>
+                                    <button class="action-btn edit" onclick="editTrainer('TR003')">Edit</button>
+                                    <button class="action-btn delete" onclick="confirmDelete('TR003')">Delete</button>
+                                </td>
+                            </tr>
+
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteConfirmModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeDeleteModal()">&times;</span>
+            <h2>Delete Trainer</h2>
+            <p>Are you sure you want to delete this trainer? This action cannot be undone.</p>
+            <div class="trainer-details">
+                <div class="detail-row">
+                    <span class="detail-label">Trainer ID:</span>
+                    <span class="detail-value" id="deleteTrainerId"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Name:</span>
+                    <span class="detail-value" id="deleteTrainerName"></span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="action-btn delete" onclick="deleteTrainer()">Delete</button>
+                <button class="action-btn cancel" onclick="closeDeleteModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       
+
+        function editTrainer(trainerId) {
+            // In a real application, you would fetch the trainer data and populate a form
+            // For now, we'll just show an alert
+            alert(`Edit trainer ${trainerId} - This would open an edit form`);
+        }
+
+        function confirmDelete(trainerId) {
+            const modal = document.getElementById('deleteConfirmModal');
+            modal.style.display = 'flex';
+            
+            // Get trainer data from the table row
+            const row = document.querySelector(`tr td:first-child:contains('${trainerId}')`).parentNode;
+            const name = row.children[1].textContent;
+            
+            document.getElementById('deleteTrainerId').textContent = trainerId;
+            document.getElementById('deleteTrainerName').textContent = name;
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteConfirmModal').style.display = 'none';
+        }
+
+        function deleteTrainer() {
+            const trainerId = document.getElementById('deleteTrainerId').textContent;
+            // In a real application, you would send a request to delete the trainer
+            alert(`Trainer ${trainerId} has been deleted`);
+            closeDeleteModal();
+            // Refresh the table or remove the row
+            location.reload();
+        }
+
+        // Close delete modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('deleteConfirmModal');
+            if (event.target == modal) {
+                closeDeleteModal();
+            }
+        }
+function toggleProfileDropdown() {
+        document.querySelector('.admin-profile').classList.toggle('active');
+    }
+
+    // Sidebar dropdown logic
+    document.addEventListener('DOMContentLoaded', () => {
+        const dropdownButtons = document.querySelectorAll('.dropdown-btn');
+
+        dropdownButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const dropdown = button.nextElementSibling;
+                dropdown.classList.toggle('active');
+            });
+        });
+    });
+
+    </script>
+</body>
+</html>

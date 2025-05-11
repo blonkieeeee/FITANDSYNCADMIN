@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Fit & Lift</title>
+  <link rel="stylesheet" href="/styles/dashboardstyles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <h2>Fit & Lift</h2>
+    </div>
+
+    <div class="header-right">
+      <div class="admin-profile" onclick="toggleProfileDropdown()">
+        <img src="/images/admin-profile.jpg" alt="Admin Profile" class="profile-pic">
+        <span>Admin</span>
+        <i class="fas fa-chevron-down"></i>
+        <div class="profile-dropdown">
+          <a href="#"><i class="fas fa-user"></i> Profile</a>
+          <a href="#"><i class="fas fa-cog"></i> Settings</a>
+          <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/images/logo.png" alt="Fit & Lift Logo" class="sidebar-logo" />
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="/html/dashboard.html">
+              <i class="fas fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <button class="dropdown-btn" onclick="toggleDropdown('paymentDropdown')">
+              <div>
+                <i class="fas fa-credit-card"></i>
+                <span>Payment Management</span>
+              </div>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <ul class="dropdown-menu" id="paymentDropdown">
+              <li><a href="/html/payment-history.html"><i class="fas fa-history"></i> View Payment History</a></li>
+              <li><a href="/html/add-payment.html"><i class="fas fa-plus"></i> Add Payment</a></li>
+            </ul>
+          </li>
+          <li>
+            <button class="dropdown-btn" onclick="toggleDropdown('memberDropdown')">
+              <div>
+                <i class="fas fa-users"></i>
+                <span>Member Management</span>
+              </div>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <ul class="dropdown-menu" id="memberDropdown">
+              <li><a href="/html/view-members.html"><i class="fas fa-list"></i> View All Members</a></li>
+              <li><a href="/html/add-member.html"><i class="fas fa-user-plus"></i> Add New Member</a></li>
+            </ul>
+          </li>
+          <li>
+            <button class="dropdown-btn" onclick="toggleDropdown('trainerDropdown')">
+              <div>
+                <i class="fas fa-dumbbell"></i>
+                <span>Trainer Management</span>
+              </div>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <ul class="dropdown-menu" id="trainerDropdown">
+              <li><a href="/html/view-trainers.html"><i class="fas fa-list"></i> View All Trainers</a></li>
+              <li><a href="/html/add-trainer.html"><i class="fas fa-user-plus"></i> Add New Trainer</a></li>
+              <li><a href="/html/assign-trainers.html"><i class="fas fa-user-check"></i> Assign Trainers</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="/html/approve-new-signups.html">
+              <i class="fas fa-user-check"></i>
+              <span>Approve New Signups</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="page-section">
+        <h1>Dashboard</h1>
+        <div class="stats-grid">
+          <div class="stat-card">Total Members<span>350</span></div>
+          <div class="stat-card">Pending Approvals<span>12</span></div>
+          <div class="stat-card">Total Trainers<span>25</span></div>
+          <div class="stat-card">Payments This Month<span>₱125,000</span></div>
+          <div class="stat-card">Active Subscriptions<span>320</span></div>
+        </div>
+
+        <h2 class="section-heading">Analytics</h2>
+        <div class="charts-grid">
+          <div class="chart-card">📊 Monthly Collection (Graph Here)</div>
+          <div class="chart-card">📈 Subscriptions Status</div>
+          <div class="chart-card">📉 New Members per Month</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Add Member Page -->
+  <section id="addMemberPage" class="page-section">
+    <h1>Add New Member</h1>
+    <form style="margin-top: 20px;">
+      <label>Full Name:</label>
+      <input type="text" placeholder="Enter full name" style="display:block; margin-bottom:10px; width:100%; padding:8px;">
+      
+      <label>Email Address:</label>
+      <input type="email" placeholder="Enter email" style="display:block; margin-bottom:10px; width:100%; padding:8px;">
+      
+      <label>Phone Number:</label>
+      <input type="tel" placeholder="Enter phone number" style="display:block; margin-bottom:10px; width:100%; padding:8px;">
+      
+      <label>Birthday:</label>
+      <input type="date" style="display:block; margin-bottom:10px; width:100%; padding:8px;">
+      
+      <label>Gender:</label>
+      <select style="display:block; margin-bottom:10px; width:100%; padding:8px;">
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+      
+      <label>Membership Plan:</label>
+      <select style="display:block; margin-bottom:10px; width:100%; padding:8px;">
+        <option value="">Select Plan</option>
+        <option value="monthly">Monthly</option>
+        <option value="quarterly">Quarterly</option>
+        <option value="annual">Annual</option>
+      </select>
+      
+      <label>Start Date:</label>
+      <input type="date" style="display:block; margin-bottom:10px; width:100%; padding:8px;">
+      
+      <button type="submit" style="margin-top:10px; padding:10px 20px; background:#f97316; color:#fff; border:none; border-radius:5px;">Add Member</button>
+    </form>
+  </section>
+
+  <script>
+    // Toggle profile dropdown
+    function toggleProfileDropdown() {
+      const profile = document.querySelector('.admin-profile');
+      profile.classList.toggle('active');
+    }
+
+    // Toggle sidebar dropdowns
+    function toggleDropdown(id) {
+      const dropdown = document.getElementById(id);
+      dropdown.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

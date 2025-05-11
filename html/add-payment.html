@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Payment - Fit & Lift</title>
+  <link rel="stylesheet" href="/styles/add-paymentstyles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-left">
+      <h2>Fit & Lift Admin Panel</h2>
+    </div>
+    <div class="header-right">
+      <div class="admin-profile" onclick="toggleProfileDropdown()">
+        <img src="/images/admin-avatar.png" alt="Admin" class="profile-pic">
+        <span>Admin Juan</span>
+        <i class="fas fa-chevron-down"></i>
+        <div class="profile-dropdown">
+          <a href="#"><i class="fas fa-user-cog"></i> Account Settings</a>
+          <a href="#"><i class="fas fa-user-plus"></i> Create Another Admin</a>
+          <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-wrapper">
+    <!-- Sidebar Section -->
+    <div class="admin-layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <img src="/pictures/logo.png" alt="Fit & Lift Logo" class="sidebar-logo" />
+        </div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li><a href="dashboard.html" class="dashboard">Dashboard</a></li>
+            <li class="dropdown">
+              <button class="dropdown-btn">Payment Management <span class="chevron">▼</span></button>
+              <ul class="dropdown-menu">
+                <li><a href="add-payment.html">Add Payment</a></li>
+                <li><a href="payment-history.html">Payment History</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <button class="dropdown-btn">Member Management<span class="chevron">▼</span></button>
+              <ul class="dropdown-menu">
+                <li><a href="add-member.html">Add Member</a></li>
+                <li><a href="view-members.html">View All Members</a></li>
+                <li><a href="approve-signups.html">Approve New Signups</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <button class="dropdown-btn">Trainer Management<span class="chevron">▼</span></button>
+              <ul class="dropdown-menu">
+                <li><a href="add-trainer.html">Add Trainer</a></li>
+                <li><a href="assign-trainers.html">Assign Trainer</a></li>
+                <li><a href="view-trainers.html">View All Trainers</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <button class="dropdown-btn">Subscription Tracking<span class="chevron">▼</span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#">Check Status</a></li>
+                <li><a href="#">Update / Renew</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="content">
+        <section id="addPaymentPage" class="page-section">
+          <h1>Add Payment</h1>
+          <form>
+            <label>Amount:</label>
+            <input type="number" placeholder="Enter payment amount" />
+        
+            <label>Payment Date:</label>
+            <input type="date" placeholder="Select date" />
+        
+            <label>Select Payer:</label>
+            <table class="payer-table">
+              <thead>
+                <tr>
+                  <th>Select</th>
+                  <th>Member Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Package Availed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="radio" name="payer" value="1"></td>
+                  <td>Juan Perez</td>
+                  <td>juan@email.com</td>
+                  <td>(555) 123-4567</td>
+                </tr>
+                <tr>
+                  <td><input type="radio" name="payer" value="2"></td>
+                  <td>Alice Johnson</td>
+                  <td>alice@email.com</td>
+                  <td>(555) 234-5678</td>
+                  <td>1 month</td>
+                </tr>
+                <tr>
+                  <td><input type="radio" name="payer" value="3"></td>
+                  <td>Mark Smith</td>
+                  <td>mark@email.com</td>
+                  <td>(555) 345-6789</td>
+                </tr>
+                <!-- Add more members here as needed -->
+              </tbody>
+            </table>
+
+            <button type="submit">Add Payment</button>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Toggle profile dropdown
+    function toggleProfileDropdown() {
+      const profile = document.querySelector('.admin-profile');
+      profile.classList.toggle('active');
+    }
+
+    // Toggle sidebar dropdowns
+    document.querySelectorAll('.dropdown-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const dropdownMenu = button.nextElementSibling;
+        dropdownMenu.classList.toggle('active');
+        button.classList.toggle('active');
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+          menu.classList.remove('active');
+        });
+        document.querySelectorAll('.dropdown-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+      }
+    });
+
+    function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('active');
+}
+
+  </script>
+</body>
+</html>

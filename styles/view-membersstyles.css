@@ -1,0 +1,183 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+header {
+  background-color: #2d2d2d;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header-left h2 {
+  color: #f97316;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.admin-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #2d2d2d;
+  border-radius: 0.5rem;
+  display: none;
+  flex-direction: column;
+  min-width: 200px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.admin-profile.active .profile-dropdown {
+  display: flex;
+}
+
+.profile-dropdown a {
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: #fff;
+}
+
+.profile-dropdown a:hover {
+  background-color: #3d3d3d;
+}
+
+.main-wrapper {
+  display: flex;
+  padding-top: 4rem;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #2d2d2d;
+  padding: 1rem;
+  position: fixed;
+  top: 4rem;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  max-width: 140px;
+  margin-bottom: 1rem;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+}
+
+.sidebar-nav a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  transition: background 0.3s;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+  background-color: #f97316;
+}
+
+.dropdown-menu {
+  display: none;
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.dropdown-menu.active {
+  display: block;
+}
+
+.dropdown-btn {
+  background: none;
+  border: none;
+  color: white;
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+.dropdown-btn:hover {
+  background-color: #3d3d3d;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  margin-left: 260px;
+}
+
+.page-section {
+  background-color: #222;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.page-section h1 {
+  font-size: 24px;
+  margin-bottom: 1rem;
+  color: #f97316;
+}
+
+.members-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.members-table th,
+.members-table td {
+  padding: 12px;
+  border-bottom: 1px solid #333;
+  text-align: left;
+}
+
+.members-table th {
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+.members-table tr:hover {
+  background-color: #3d3d3d;
+}
+
+.members-table a {
+  color: #f97316;
+  text-decoration: none;
+}
+
+.members-table a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,207 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #111;
+    color: #eee;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 15px 30px;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.header-left h2 {
+    font-size: 20px;
+    color: #f97316;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.admin-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.profile-pic {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f97316;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: #2a2a2a;
+    border-radius: 8px;
+    width: 180px;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: visibility 0.3s, opacity 0.3s, transform 0.3s ease;
+}
+
+.profile-dropdown a {
+    padding: 12px 16px;
+    color: #eee;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    border-bottom: 1px solid #333;
+}
+
+.profile-dropdown a:hover {
+    background-color: #f97316;
+    color: #fff;
+}
+
+.admin-profile.active .profile-dropdown {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* MAIN WRAPPER */
+.main-wrapper {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: linear-gradient(to bottom, #1a1a1a, #0f0f0f);
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.4);
+    transition: width 0.3s ease-in-out;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar-logo {
+    width: 120px;
+    filter: brightness(1.2);
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav a,
+.dropdown-btn {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    color: #eee;
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    width: 100%;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.sidebar-nav a:hover,
+.dropdown-btn:hover {
+    background-color: #f97316;
+    color: #fff;
+}
+
+.dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    padding-left: 10px;
+}
+
+.dropdown-menu.active {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.dropdown-menu li a {
+    background: #222;
+    font-size: 14px;
+    padding: 10px 16px;
+    margin-top: 4px;
+    border-radius: 5px;
+}
+
+/* CONTENT */
+.content {
+    
+    padding: 30px;
+    background-color: #181818;
+    flex: 1;
+    display: block;
+}
+
+/* PAGE SECTION (PAYMENT HISTORY TABLE) */
+.page-section {
+    background: #222;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+
+.page-section h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #f97316;
+}
+
+/* TABLE STYLES */
+.payment-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.payment-history-table th, .payment-history-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.payment-history-table th {
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+.payment-history-table tr:hover {
+    background-color: #444;
+}

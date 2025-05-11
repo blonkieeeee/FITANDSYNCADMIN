@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Assign Trainers - Fit & Lift</title>
+  <link rel="stylesheet" href="/styles/assign-trainersstyles.css" />
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-left">
+      <h2>Fit & Lift Admin Panel</h2>
+    </div>
+    <div class="header-right">
+      <div class="admin-profile" id="adminProfile">
+        <span class="admin-name">Admin Juan <span class="chevron">▼</span></span>
+        <img src="/pictures/profile.jpg" alt="Admin Profile" class="profile-pic">
+        <div class="profile-dropdown">
+          <a href="#">Account Settings</a>
+          <a href="#">Create Another Admin</a>
+          <a href="#">Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-wrapper">
+    <!-- Sidebar Section -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/pictures/logo.png" alt="Fit & Lift Logo" class="sidebar-logo" />
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html" class="dashboard">Dashboard</a></li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Payment Management <span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-payment.html">Add Payment</a></li>
+              <li><a href="payment-history.html">Payment History</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Member Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-member.html">Add Member</a></li>
+              <li><a href="#">View All Members</a></li>
+              <li><a href="approve-signups.html">Approve New Signups</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Trainer Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-trainer.html">Add Trainer</a></li>
+              <li><a href="assign-trainers.html">Assign Trainer</a></li>
+              <li><a href="#">View All Trainers</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Subscription Tracking<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Check Status</a></li>
+              <li><a href="#">Update / Renew</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <div class="page-section">
+        <h1>Assign Trainers</h1>
+        
+        <!-- Search and Filter Section -->
+        <div class="search-filter-section">
+          <div class="search-box">
+            <input type="text" placeholder="Search members..." id="memberSearch">
+            <button class="search-btn">Search</button>
+          </div>
+          <div class="filter-box">
+            <select id="trainerFilter">
+              <option value="">All Trainers</option>
+              <option value="available">Available Trainers</option>
+              <option value="busy">Busy Trainers</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Assignment Table -->
+        <div class="table-container">
+          <table class="assignment-table">
+            <thead>
+              <tr>
+                <th>Member Name</th>
+                <th>Current Trainer</th>
+                <th>Package</th>
+                <th>Available Trainers</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John Doe</td>
+                <td>Mike Johnson</td>
+                <td>Premium Monthly</td>
+                <td>
+                  <select class="trainer-select">
+                    <option value="">Select Trainer</option>
+                    <option value="1">Sarah Wilson</option>
+                    <option value="2">David Brown</option>
+                    <option value="3">Emma Davis</option>
+                  </select>
+                </td>
+                <td>
+                  <button class="action-btn assign" onclick="showConfirmModal('assign', 'John Doe')">Assign</button>
+                  <button class="action-btn remove" onclick="showConfirmModal('remove', 'John Doe')">Remove</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Jane Smith</td>
+                <td>None</td>
+                <td>Basic Yearly</td>
+                <td>
+                  <select class="trainer-select">
+                    <option value="">Select Trainer</option>
+                    <option value="1">Sarah Wilson</option>
+                    <option value="2">David Brown</option>
+                    <option value="3">Emma Davis</option>
+                  </select>
+                </td>
+                <td>
+                  <button class="action-btn assign" onclick="showConfirmModal('assign', 'Jane Smith')">Assign</button>
+                  <button class="action-btn remove" onclick="showConfirmModal('remove', 'Jane Smith')">Remove</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="modalTitle">Confirm Action</h2>
+      <p id="modalMessage">Are you sure you want to <span id="actionType">assign</span> a trainer to <span id="memberName">John Doe</span>?</p>
+      <div class="modal-buttons">
+        <button id="confirmAction" class="action-btn">Confirm</button>
+        <button id="cancelAction" class="action-btn cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Admin profile dropdown
+    const adminProfile = document.getElementById('adminProfile');
+    adminProfile.addEventListener('click', () => {
+      adminProfile.classList.toggle('active');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!adminProfile.contains(e.target)) {
+        adminProfile.classList.remove('active');
+      }
+    });
+
+    // Sidebar dropdown toggle
+    const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+    dropdownBtns.forEach(button => {
+      button.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const dropdownMenu = this.nextElementSibling;
+        dropdownMenu.classList.toggle('active');
+      });
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('confirmModal');
+    const closeModal = document.querySelector('.close-modal');
+    const cancelAction = document.getElementById('cancelAction');
+    const confirmAction = document.getElementById('confirmAction');
+    let currentAction = '';
+    let currentMember = '';
+
+    function showConfirmModal(action, memberName) {
+      currentAction = action;
+      currentMember = memberName;
+      const modalTitle = document.getElementById('modalTitle');
+      const modalMessage = document.getElementById('modalMessage');
+      const actionType = document.getElementById('actionType');
+      const memberNameSpan = document.getElementById('memberName');
+      const confirmBtn = document.getElementById('confirmAction');
+
+      modalTitle.textContent = `Confirm ${action.charAt(0).toUpperCase() + action.slice(1)}`;
+      actionType.textContent = action;
+      memberNameSpan.textContent = memberName;
+      confirmBtn.className = `action-btn ${action}`;
+      confirmBtn.textContent = action.charAt(0).toUpperCase() + action.slice(1);
+
+      modal.style.display = 'flex';
+    }
+
+    function closeConfirmModal() {
+      modal.style.display = 'none';
+    }
+
+    closeModal.onclick = closeConfirmModal;
+    cancelAction.onclick = closeConfirmModal;
+
+    confirmAction.onclick = function() {
+      // Here you would typically make an API call to process the action
+      console.log(`${currentAction}ing trainer for ${currentMember}`);
+      closeConfirmModal();
+    };
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        closeConfirmModal();
+      }
+    };
+
+    // Search functionality
+    const memberSearch = document.getElementById('memberSearch');
+    memberSearch.addEventListener('input', function() {
+      // Add search functionality here
+      console.log('Searching for:', this.value);
+    });
+
+    // Filter functionality
+    const trainerFilter = document.getElementById('trainerFilter');
+    trainerFilter.addEventListener('change', function() {
+      // Add filter functionality here
+      console.log('Filtering by:', this.value);
+    });
+  </script>
+</body>
+</html>

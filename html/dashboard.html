@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Fit & Lift</title>
+  <link rel="stylesheet" href="/styles/dashboardstyles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js Library -->
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <h2>Fit & Lift Admin Panel</h2>
+    </div>
+
+    <div class="header-right">
+      <div class="admin-profile" id="adminProfile">
+        <span class="admin-name">Admin Juan <span class="chevron">▼</span></span>
+        <img src="/pictures/profile.jpg" alt="Admin Profile" class="profile-pic">
+
+        <!-- Dropdown Menu -->
+        <div class="profile-dropdown">
+          <a href="#">Account Settings</a>
+          <a href="#">Create Another Admin</a>
+          <a href="#">Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/pictures/logo.png" alt="Fit & Lift Logo" class="sidebar-logo" />
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html" class="dashboard">Dashboard</a></li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Payment Management <span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-payment.html">Add Payment</a></li>
+              <li><a href="payment-history.html">Payment History</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <button class="dropdown-btn">Member Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-member.html">Add Member</a></li>
+              <li><a href="#">View All Members</a></li>
+              <li><a href="approve-signups.html">Approve New Signups</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <button class="dropdown-btn">Trainer Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-trainer.html">Add Trainer</a></li>
+              <li><a href="#">Assign Trainer</a></li>
+              <li><a href="#">View All Trainers</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <button class="dropdown-btn">Subscription Tracking<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Check Status</a></li>
+              <li><a href="#">Update / Renew</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard">
+      <h1>Dashboard Overview</h1>
+      <div class="stats-grid">
+        <div class="stat-card">Total Members<span>350</span></div>
+        <div class="stat-card">Pending Approvals<span>12</span></div>
+        <div class="stat-card">Total Trainers<span>25</span></div>
+        <div class="stat-card">Payments This Month<span>₱125,000</span></div>
+        <div class="stat-card">Active Subscriptions<span>320</span></div>
+      </div>
+
+      <!-- Graphs Section -->
+      <div class="graphs">
+        <div class="chart-card">
+          <h3>Membership Growth</h3>
+          <canvas id="membershipGrowthChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Payment Trends</h3>
+          <canvas id="paymentTrendsChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Subscription Status</h3>
+          <canvas id="subscriptionStatusChart"></canvas>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // Sample Data for the charts
+    const ctx1 = document.getElementById('membershipGrowthChart').getContext('2d');
+    const membershipGrowthChart = new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [{
+          label: 'Members',
+          data: [100, 150, 200, 250, 350],
+          borderColor: '#f97316',
+          backgroundColor: 'rgba(249, 115, 22, 0.2)',
+          borderWidth: 2,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    const ctx2 = document.getElementById('paymentTrendsChart').getContext('2d');
+    const paymentTrendsChart = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [{
+          label: 'Payments (₱)',
+          data: [50000, 70000, 60000, 100000, 125000],
+          backgroundColor: '#f97316',
+          borderColor: '#f97316',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    const ctx3 = document.getElementById('subscriptionStatusChart').getContext('2d');
+    const subscriptionStatusChart = new Chart(ctx3, {
+      type: 'pie',
+      data: {
+        labels: ['Active', 'Expired', 'Pending'],
+        datasets: [{
+          label: 'Subscriptions',
+          data: [320, 15, 15],
+          backgroundColor: ['#f97316', '#ff6347', '#4caf50'],
+          borderColor: '#fff',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+
+    // Sidebar dropdowns
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const menu = btn.nextElementSibling;
+        menu.classList.toggle('active');
+        btn.classList.toggle('active');
+      });
+    });
+
+    // Admin profile dropdown
+    const adminProfile = document.getElementById('adminProfile');
+
+    adminProfile.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent window click from firing
+      adminProfile.classList.toggle('active');
+    });
+
+    // Click outside to close admin dropdown
+    window.addEventListener('click', (e) => {
+      if (!adminProfile.contains(e.target)) {
+        adminProfile.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
