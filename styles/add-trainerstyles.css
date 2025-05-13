@@ -9,6 +9,7 @@
 body {
     background-color: #1a1a1a;
     color: #ffffff;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Header Styles */
@@ -95,11 +96,12 @@ header {
 .main-wrapper {
     display: flex;
     min-height: 100vh;
-    padding-top: 4rem;
+    overflow: auto;
 }
 
 .sidebar {
     width: 280px;
+    flex-shrink: 0;
     background-color: #2d2d2d;
     padding: 1rem;
     position: fixed;
@@ -107,6 +109,7 @@ header {
     bottom: 0;
     left: 0;
     overflow-y: auto;
+    z-index: 500; /* Ensure sidebar is below header */
 }
 
 .sidebar-header {
@@ -191,9 +194,13 @@ header {
 
 /* Main Content Styles */
 main {
+    padding: 30px;
     flex: 1;
-    padding: 2rem;
-    margin-left: 280px;
+    background-color: #181818;
+    transition: margin-left 0.3s ease;
+    height: 100%;
+    width: 1650px;
+    margin-left: 270px;
 }
 
 /* Responsive Design */
@@ -209,10 +216,6 @@ main {
         width: 280px;
         padding: 1rem;
         transform: translateX(0);
-    }
-
-    main {
-        margin-left: 0;
     }
 
     .header-left h2 {
@@ -231,12 +234,14 @@ main {
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    width: 100%;
+   
+    
+    margin: 0 auto;
 }
 
 .page-section h1 {
     font-size: 24px;
-    margin-bottom: 20px;
+    
     color: #f97316;
 }
 
@@ -399,4 +404,3 @@ form button:hover {
 .payment-history-table th {
     border: 1px solid #444;
 }
-

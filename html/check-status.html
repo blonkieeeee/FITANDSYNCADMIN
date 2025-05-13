@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subscription Status - Fit & Lift</title>
+  <link rel="stylesheet" href="/styles/view-membersstyles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-left">
+      <h2>Fit & Lift</h2>
+    </div>
+    <div class="header-right">
+      <div class="admin-profile" onclick="toggleProfileDropdown()">
+        <img src="/images/admin-profile.jpg" alt="Admin Profile" class="profile-pic">
+        <span>Admin</span>
+        <i class="fas fa-chevron-down"></i>
+        <div class="profile-dropdown">
+          <a href="#"><i class="fas fa-user"></i> Profile</a>
+          <a href="#"><i class="fas fa-cog"></i> Settings</a>
+          <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-wrapper">
+    <!-- Sidebar Section -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/pictures/logo.png" alt="Fit & Lift Logo" class="sidebar-logo" />
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html" class="dashboard"> Dashboard</a></li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Payment Management <span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+                <li><a href="add-payment.html">Add Payment</a></li>
+              <li><a href="payment-history.html">Payment History</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Member Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-member.html" class="add-member-link">Add Member</a></li>
+              <li><a href="view-members.html">View All Members</a></li>
+              <li><a href="approve-signups.html">Approve New Signups</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Trainer Management<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="add-trainer.html" class="add-trainer-link">Add Trainer</a></li>
+              <li><a href="assign-trainers.html">Assign Trainer</a></li>
+              <li><a href="view-trainers.html">View All Trainers</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-btn">Subscription Tracking<span class="chevron">▼</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="check-status.html">Check Status</a></li>
+              <li><a href="update-renew.html">Update / Renew</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content">
+      <section id="subscriptionStatusPage" class="page-section">
+        <h1>Subscription Status</h1>
+        <table class="members-table">
+          <thead>
+            <tr>
+              <th>Member ID</th>
+              <th>Member Name</th>
+              <th>Email</th>
+              <th>Package Availed</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Status</th>
+              <th>Days Remaining</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#001</td>
+              <td>John Doe</td>
+              <td>johndoe@example.com</td>
+              <td>Monthly</td>
+              <td>2024-05-01</td>
+              <td>2024-05-31</td>
+              <td><span class="status-active">Active</span></td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td>#002</td>
+              <td>Jane Smith</td>
+              <td>janesmith@example.com</td>
+              <td>Annual</td>
+              <td>2024-01-01</td>
+              <td>2024-12-31</td>
+              <td><span class="status-active">Active</span></td>
+              <td>90</td>
+            </tr>
+            <tr>
+              <td>#003</td>
+              <td>Bob Wilson</td>
+              <td>bobwilson@example.com</td>
+              <td>Monthly</td>
+              <td>2024-04-01</td>
+              <td>2024-04-30</td>
+              <td><span class="status-expired">Expired</span></td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    function toggleProfileDropdown() {
+      document.querySelector('.admin-profile').classList.toggle('active');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropdownButtons = document.querySelectorAll('.dropdown-btn');
+      dropdownButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const dropdown = button.nextElementSibling;
+          dropdown.classList.toggle('active');
+        });
+      });
+    });
+  </script>
+  <style>
+    .status-active {
+      color: #22c55e;
+      font-weight: bold;
+    }
+    .status-expired {
+      color: #ef4444;
+      font-weight: bold;
+    }
+  </style>
+</body>
+</html> 
