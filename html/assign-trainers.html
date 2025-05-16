@@ -42,7 +42,7 @@
             </ul>
           </li>
           <li class="dropdown">
-            <button class="dropdown-btn">Member Management<span class="chevron">▼</span></button>
+            <button class="dropdown-btn">Member Management <span class="chevron">▼</span></button>
             <ul class="dropdown-menu">
               <li><a href="add-member.html">Add Member</a></li>
               <li><a href="#">View All Members</a></li>
@@ -50,7 +50,7 @@
             </ul>
           </li>
           <li class="dropdown">
-            <button class="dropdown-btn">Trainer Management<span class="chevron">▼</span></button>
+            <button class="dropdown-btn">Trainer Management <span class="chevron">▼</span></button>
             <ul class="dropdown-menu">
               <li><a href="add-trainer.html">Add Trainer</a></li>
               <li><a href="assign-trainers.html">Assign Trainer</a></li>
@@ -58,7 +58,7 @@
             </ul>
           </li>
           <li class="dropdown">
-            <button class="dropdown-btn">Subscription Tracking<span class="chevron">▼</span></button>
+            <button class="dropdown-btn">Subscription Tracking <span class="chevron">▼</span></button>
             <ul class="dropdown-menu">
               <li><a href="check-status.html">Check Status</a></li>
               <li><a href="update-renew.html">Update / Renew</a></li>
@@ -72,8 +72,6 @@
     <main class="content">
       <div class="page-section">
         <h1>Assign Trainers</h1>
-        
-        <!-- Search and Filter Section -->
         <div class="search-filter-section">
           <div class="search-box">
             <input type="text" placeholder="Search members..." id="memberSearch">
@@ -88,7 +86,6 @@
           </div>
         </div>
 
-        <!-- Assignment Table -->
         <div class="table-container">
           <table class="assignment-table">
             <thead>
@@ -156,20 +153,17 @@
   </div>
 
   <script>
-    // Admin profile dropdown
     const adminProfile = document.getElementById('adminProfile');
     adminProfile.addEventListener('click', () => {
       adminProfile.classList.toggle('active');
     });
 
-    // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
       if (!adminProfile.contains(e.target)) {
         adminProfile.classList.remove('active');
       }
     });
 
-    // Sidebar dropdown toggle
     const dropdownBtns = document.querySelectorAll('.dropdown-btn');
     dropdownBtns.forEach(button => {
       button.addEventListener('click', function() {
@@ -179,7 +173,6 @@
       });
     });
 
-    // Modal functionality
     const modal = document.getElementById('confirmModal');
     const closeModal = document.querySelector('.close-modal');
     const cancelAction = document.getElementById('cancelAction');
@@ -190,18 +183,11 @@
     function showConfirmModal(action, memberName) {
       currentAction = action;
       currentMember = memberName;
-      const modalTitle = document.getElementById('modalTitle');
-      const modalMessage = document.getElementById('modalMessage');
-      const actionType = document.getElementById('actionType');
-      const memberNameSpan = document.getElementById('memberName');
-      const confirmBtn = document.getElementById('confirmAction');
-
-      modalTitle.textContent = `Confirm ${action.charAt(0).toUpperCase() + action.slice(1)}`;
-      actionType.textContent = action;
-      memberNameSpan.textContent = memberName;
-      confirmBtn.className = `action-btn ${action}`;
-      confirmBtn.textContent = action.charAt(0).toUpperCase() + action.slice(1);
-
+      document.getElementById('modalTitle').textContent = `Confirm ${action}`;
+      document.getElementById('actionType').textContent = action;
+      document.getElementById('memberName').textContent = memberName;
+      confirmAction.className = `action-btn ${action}`;
+      confirmAction.textContent = action.charAt(0).toUpperCase() + action.slice(1);
       modal.style.display = 'flex';
     }
 
@@ -213,31 +199,15 @@
     cancelAction.onclick = closeConfirmModal;
 
     confirmAction.onclick = function() {
-      // Here you would typically make an API call to process the action
       console.log(`${currentAction}ing trainer for ${currentMember}`);
       closeConfirmModal();
     };
 
-    // Close modal when clicking outside
     window.onclick = function(event) {
       if (event.target == modal) {
         closeConfirmModal();
       }
     };
-
-    // Search functionality
-    const memberSearch = document.getElementById('memberSearch');
-    memberSearch.addEventListener('input', function() {
-      // Add search functionality here
-      console.log('Searching for:', this.value);
-    });
-
-    // Filter functionality
-    const trainerFilter = document.getElementById('trainerFilter');
-    trainerFilter.addEventListener('change', function() {
-      // Add filter functionality here
-      console.log('Filtering by:', this.value);
-    });
   </script>
 </body>
 </html>
